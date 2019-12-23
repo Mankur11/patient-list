@@ -5,7 +5,7 @@ const patientInfo = () => {
 
     return (
         <section className={classes.section}>
-            <header className={classes.header}><a>Информация о пациенте</a></header>
+            <header className={classes.header}><div>Информация о пациенте</div></header>
             <section>
                 <section>
                     <ul className={classes.ul}>

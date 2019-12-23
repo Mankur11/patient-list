@@ -14,12 +14,11 @@
 
 .header {
     display: flex;
-    padding-bottom: 2vh;
-    padding-top: 2vh;
     background-color: lightblue;
     height: 5vh;
     width: 100%;
-    align-self: center;
+    justify-content: center;
+    flex-direction: column;
 }
 
 .header>a {
