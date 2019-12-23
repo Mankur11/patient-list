@@ -3,8 +3,10 @@ import classes from './PatientLists.module.css';
 import getPatientData from '../Parser/Parser';
 
 const patientLists = () => {
-    const name = getPatientData();
-    console.log(name);
+
+    const result = getPatientData();
+    console.log(result);
+
     return (
 
         <section className={classes.section}>
@@ -17,7 +19,7 @@ const patientLists = () => {
             <section>
                 <ul className={classes.ul}>
                     <li className={classes.li}>№ИБ</li>
-                    <li className={classes.li}>ФИО</li>
+                    <li className={classes.li}></li>
                     <li className={classes.li}>Палата</li>
                 </ul>
 
