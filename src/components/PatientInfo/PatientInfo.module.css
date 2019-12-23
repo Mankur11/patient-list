@@ -1,0 +1,40 @@
+.section {
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+    width: 95%;
+    height: 96vh;
+    background-color: lightseagreen;
+}
+
+.section :nth-child(1) {
+    display: inline-flex;
+    align-items: flex-start;
+}
+
+.header {
+    display: flex;
+    padding-bottom: 2vh;
+    padding-top: 2vh;
+    background-color: lightblue;
+    height: 5vh;
+    width: 100%;
+    align-self: center;
+}
+
+.header>a {
+    align-self: center;
+}
+
+.ul {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 0;
+    margin-right: 5px;
+}
+
+.li {
+    list-style: none;
+    white-space: nowrap;
+}
