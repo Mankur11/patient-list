@@ -6,6 +6,7 @@ import PatientInfo from './components/PatientInfo/PatientInfo'
 function App() {
     return (
         <div className="App">
+            <PatientInfo/>
             <PatientLists/>
         </div>
     );

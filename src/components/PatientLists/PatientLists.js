@@ -1,13 +1,18 @@
-import React, {useState, useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import classes from './PatientLists.module.css';
 
 function PatientLists(props) {
+    const [data, setData] = useState([]);
+    useEffect(() => {
+        async function listParser() {
+            const response = await fetch("/data/presentList.json");
+            const result = await response.json();
+            setData(prev => result);
+        }
+        listParser();
+    }, []);
 
-    const [numberOfPatient, setNumberOfPatient] = useState([]);
-    const [lastNamePatient, setLastNamePatient] = useState([]);
-    const [bedNumberPatient, setBedNumberPatient] = useState([]);
-
-    const patientListHeader = (
+    const patientList = (
         <div>
             <div className={classes.patientListHeader}><a>Присутствуют</a></div>
             <table className={classes.patientList}>
@@ -16,38 +21,28 @@ function PatientLists(props) {
                     <td>ФИО</td>
                     <td>Палата</td>
                 </tr>
+                <td>
+                    {data.map(item => (
+                        <tr>{item.historyNumber}</tr>
+                    ))}
+                </td>
+                <td>
+                    {data.map(item => (
+                        <tr>{item.firstName} {item.lastName}</tr>
+                    ))}
+                </td>
+                <td>
+                    {data.map(item => (
+                        <tr>{item.bedNumber}</tr>
+                    ))}
+                </td>
             </table>
         </div>
     );
-
-    const patientList = () => (
-        <div>
-            <table className={classes.patientList}>
-                <td>{numberOfPatient}</td>
-                <td>{lastNamePatient}</td>
-                <td>{bedNumberPatient}</td>
-            </table>
-        </div>
-    );
-
-    useEffect(() => {
-        async function patientsListParser() {
-            const response = await fetch("/data/presentList.json");
-            const result = await response.json();
-            result.map(el => {
-                setNumberOfPatient(prevValue => Array.from(prevValue).push(el.historyNumber));
-                setLastNamePatient(prevValue => el.lastName);
-                setBedNumberPatient(prevValue => el.bedNumber);
-            })
-        }
-
-        patientsListParser();
-    }, []);
 
     return (
         <div className={classes.patientListWrapper}>
-            {patientListHeader}
-            {patientList()}
+            {patientList}
         </div>
     );
 }
