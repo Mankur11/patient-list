@@ -1,39 +1,25 @@
-.section {
-    display: flex;
-    flex-direction: column;
-    margin: 10px;
-    width: 95%;
-    height: 96vh;
-    background-color: lightseagreen;
+
+.patientInfoWrapper{
+    margin: 0 auto;
+    width: 50%;
 }
 
-.section :nth-child(1) {
-    display: inline-flex;
-    align-items: flex-start;
-}
-
-.header {
-    display: flex;
-    background-color: lightblue;
-    height: 5vh;
+.patientInfoHeader {
+    background-color: #3398cc;
+    color: #fefefe;
     width: 100%;
-    justify-content: center;
-    flex-direction: column;
+    height: 2em;
+    position: relative;
 }
 
-.header>a {
-    align-self: center;
+.patientInfoHeader>a{
+    margin-left: 1em;
+    position: absolute;
+    top: 13%;
+
 }
 
-.ul {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    padding: 0;
-    margin-right: 5px;
+.patientInfo{
+
 }
 
-.li {
-    list-style: none;
-    white-space: nowrap;
-}

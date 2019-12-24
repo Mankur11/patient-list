@@ -1,28 +1,32 @@
-import React from "react";
-import classes from './PatientInfo.module.css';
-
-const patientInfo = () => {
-
-    return (
-        <section className={classes.section}>
-            <header className={classes.header}><div>Информация о пациенте</div></header>
-            <section>
-                <section>
-                    <ul className={classes.ul}>
-                        <li className={classes.li}>ФИО</li>
-                        <li className={classes.li}>Возраст</li>
-                        <li className={classes.li}>Диагноз</li>
-                    </ul>
-
-                    <ul className={classes.ul}>
-                        <li className={classes.li}>Boris Godunov</li>
-                        <li className={classes.li}>63</li>
-                        <li className={classes.li}>Аритмия</li>
-                    </ul>
-                </section>
-            </section>
-        </section>
-    );
-};
-
-export default patientInfo;
+// import React from "react";
+// import classes from './PatientInfo.module.css';
+//
+// const patientInfo = () => {
+//     const patientInfoHeader = (
+//         <div className={classes.patientInfoHeader}><a>Информация о пациенте</a></div>
+//     );
+//
+//     const patientInfoList = (
+//         <table>
+//             <td>
+//                 <tr>ФИО</tr>
+//                 <tr>Возраст</tr>
+//                 <tr>Диагноз</tr>
+//             </td>
+//             <td className={classes.patientInfo}>
+//                 <tr>Иванов</tr>
+//                 <tr>81</tr>
+//                 <tr>Аритмия</tr>
+//             </td>
+//         </table>
+//     );
+//
+//     return (
+//         <div className={classes.patientInfoWrapper}>
+//             {patientInfoHeader}
+//             {patientInfoList}
+//         </div>
+//     );
+// };
+//
+// export default patientInfo;

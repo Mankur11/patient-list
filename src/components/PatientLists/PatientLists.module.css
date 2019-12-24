@@ -1,47 +1,24 @@
-.section {
-    display: flex;
-    flex-direction: column;
-    margin: 10px;
-    width: 95%;
-    height: 96vh;
-    background-color: lightseagreen;
 
+
+.patientListWrapper{
+    margin: 0 auto;
+    width: 50%;
 }
 
-.header {
-    display: flex;
-    height: 5vh;
+.patientListHeader {
     width: 100%;
-    background-color: lightblue;
-    align-items: center;
+    height: 2em;
+    position: relative;
 }
 
-.tabs__links {
-    display: flex;
+.patientListHeader>a{
+    margin-left: 1em;
+    position: absolute;
+    top: 13%;
+}
+
+.patientList{
     width: 100%;
-    overflow-x: auto;
-    overflow-y: hidden;
-    white-space: nowrap;
 }
 
-.tabs__links>a {
-    text-decoration: none;
-    color: black;
-    display: inline-block;
-    padding: 6px 10px;
-}
 
-.tabs__links>a:hover {
-   color: blue;
-}
-.ul {
-    display: inline-flex;
-    width: 100%;
-    padding: 0;
-    justify-content: space-between;
-}
-
-.li {
-    list-style: none;
-    white-space: nowrap;
-}

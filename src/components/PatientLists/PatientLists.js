@@ -1,36 +1,55 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import classes from './PatientLists.module.css';
-import getPatientData from '../Parser/Parser';
 
-const patientLists = () => {
+function PatientLists(props) {
 
-    const result = getPatientData();
-    console.log(result);
+    const [numberOfPatient, setNumberOfPatient] = useState([]);
+    const [lastNamePatient, setLastNamePatient] = useState([]);
+    const [bedNumberPatient, setBedNumberPatient] = useState([]);
+
+    const patientListHeader = (
+        <div>
+            <div className={classes.patientListHeader}><a>Присутствуют</a></div>
+            <table className={classes.patientList}>
+                <tr>
+                    <td>№ИБ</td>
+                    <td>ФИО</td>
+                    <td>Палата</td>
+                </tr>
+            </table>
+        </div>
+    );
+
+    const patientList = () => (
+        <div>
+            <table className={classes.patientList}>
+                <td>{numberOfPatient}</td>
+                <td>{lastNamePatient}</td>
+                <td>{bedNumberPatient}</td>
+            </table>
+        </div>
+    );
+
+    useEffect(() => {
+        async function patientsListParser() {
+            const response = await fetch("/data/presentList.json");
+            const result = await response.json();
+            result.map(el => {
+                setNumberOfPatient(prevValue => Array.from(prevValue).push(el.historyNumber));
+                setLastNamePatient(prevValue => el.lastName);
+                setBedNumberPatient(prevValue => el.bedNumber);
+            })
+        }
+
+        patientsListParser();
+    }, []);
 
     return (
-
-        <section className={classes.section}>
-            <header className={classes.header}>
-                <div className={classes.tabs__links}>
-                    <a href="#content-1">Присутствуют</a>
-                    <a href="#content-2">Выбывшие</a>
-                </div>
-            </header>
-            <section>
-                <ul className={classes.ul}>
-                    <li className={classes.li}>№ИБ</li>
-                    <li className={classes.li}></li>
-                    <li className={classes.li}>Палата</li>
-                </ul>
-
-                <ul className={classes.ul}>
-                    <li className={classes.li}>1</li>
-                    <li className={classes.li}>Hell</li>
-                    <li className={classes.li}>10</li>
-                </ul>
-            </section>
-        </section>
+        <div className={classes.patientListWrapper}>
+            {patientListHeader}
+            {patientList()}
+        </div>
     );
-};
+}
 
-export default patientLists;
+export default PatientLists;
