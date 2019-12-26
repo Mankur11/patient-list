@@ -90,7 +90,7 @@ class PatientList extends Component {
                 </tr>
                 {this.state.tabSelectedRoom === 'Палата' ?
                     presentDataArr.map(item => (
-                        <tr className={classes.hoveredPatient}>
+                        <tr className={classes.patient}>
                             <td onClick={() => this.isSelectedPatient(item)}>{item.historyNumber} </td>
                             <td onClick={() => this.isSelectedPatient(item)}>{item.firstName} {item.lastName}</td>
                             <td onClick={() => this.isSelectedPatient(item)}>{item.bedNumber}</td>
@@ -98,7 +98,7 @@ class PatientList extends Component {
                     ))
                     :
                     retiredDataArr.map(item => (
-                        <tr className={classes.hoveredPatient}>
+                        <tr className={classes.patient}>
                             <td onClick={() => this.isSelectedPatient(item)}>{item.historyNumber}</td>
                             <td onClick={() => this.isSelectedPatient(item)}>{item.firstName} {item.lastName}</td>
                             <td onClick={() => this.isSelectedPatient(item)}>{item.cause}</td>
@@ -113,7 +113,7 @@ class PatientList extends Component {
         return (
             <div>
                 <table>
-                    <tr className={classes.patientInfoHeader}>Информация о пациенте
+                    <tr className={classes.patientInfoHeader}><a>Информация о пациенте</a>
                         <a href={''} onClick={() => this.isClickedArrowButton()}>&#60;</a>
                     </tr>
                     <td>

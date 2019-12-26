@@ -4,6 +4,7 @@
 }
 
 .patientInfoHeader {
+    background-color: #3398cc;
     color: #fefefe;
     width: 100%;
     height: 2em;
@@ -11,16 +12,20 @@
 
 .patientInfoHeader a {
     text-decoration: none;
+    margin-left: 1em;
 }
 
 .greyFont {
-color: gray;
+    color: #b3b3b3;
 }
 
 .patientListHeader {
     width: 100%;
     height: 2em;
-    background-color: lightgray;
+}
+
+.patientListHeader > a:hover {
+    border-bottom: 2px solid #3398cc;
 }
 
 .patientListHeader > a {
@@ -38,8 +43,12 @@ table {
     border-collapse: collapse;
 }
 
-.hoveredPatient :hover {
-    background-color: lightgray;
+.patient {
+   border-bottom: 1px solid #e2e2e2;
+}
+.patient :hover {
+    background-color: #e2e2e2;
+    border-left: 2px solid #3398cc;
 }
 
 .hidePatientInfo {
