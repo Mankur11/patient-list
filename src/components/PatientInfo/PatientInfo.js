@@ -1,11 +1,12 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useState, useContext} from "react";
 import classes from './PatientInfo.module.css';
+
 
 function PatientInfo(props) {
     const [data, setData] = useState([]);
     useEffect(() => {
         async function infoParser() {
-            const response = await fetch("/data/quittingList.json");
+            const response = await fetch("/data/presentList.json");
             const result = await response.json();
             setData(prev => result);
         }
@@ -22,14 +23,17 @@ function PatientInfo(props) {
                     <tr>Диагноз</tr>
                 </td>
                 <td>
-
+                    <tr>{props.firstName} {props.lastName}</tr>
+                    <tr>{props.birthDate}</tr>
+                    <tr>{props.diagnosis}</tr>
                 </td>
             </table>
         </div>
     );
-
     return (
-        <div className={classes.patientInfoWrapper}>
+        <div
+            // className={classes.patientInfoWrapper}
+        >
             {patientInfo}
         </div>
     );

@@ -1,14 +1,18 @@
 import React, {useEffect, useState} from "react";
 import classes from './PatientLists.module.css';
 
+
 function PatientLists(props) {
+
     const [data, setData] = useState([]);
+
     useEffect(() => {
         async function listParser() {
             const response = await fetch("/data/presentList.json");
             const result = await response.json();
             setData(prev => result);
         }
+
         listParser();
     }, []);
 
@@ -28,7 +32,7 @@ function PatientLists(props) {
                 </td>
                 <td>
                     {data.map(item => (
-                        <tr>{item.firstName} {item.lastName}</tr>
+                        <tr onClick={()=>props.isClicked=true}>{item.firstName} {item.lastName}</tr>
                     ))}
                 </td>
                 <td>
@@ -41,7 +45,9 @@ function PatientLists(props) {
     );
 
     return (
-        <div className={classes.patientListWrapper}>
+        <div
+            // className={classes.patientListWrapper}
+        >
             {patientList}
         </div>
     );

@@ -1,0 +1,34 @@
+.PatientListWrapper {
+    width: 100%;
+    display: flex;
+}
+
+.patientInfoHeader {
+    background-color: #3398cc;
+    color: #fefefe;
+    width: 100%;
+    height: 2em;
+}
+
+.patientInfoHeader > a {
+    margin-left: 1em;
+    top: 13%;
+}
+
+.patientListHeader {
+    width: 100%;
+    height: 2em;
+}
+
+.patientListHeader > a {
+    margin-left: 1em;
+    top: 13%;
+}
+
+table {
+    width: 100%;
+    table-layout: fixed;
+    border-collapse: collapse;
+    border: 1px solid purple;
+}
+
