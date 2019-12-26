@@ -75,36 +75,38 @@ class PatientList extends Component {
     patientData(presentDataArr, retiredDataArr) {
         return (
             <table>
-                <tr className={classes.patientListHeader}>
-                    <a onClick={() => this.isSelectedPresentPatient()}>
-                        ПРИСУТСТВУЮТ({this.numberOfPresentAndRetired(this.state.presentData)})
-                    </a>
-                    <a onClick={() => this.isSelectedRetiredPatient()}>
-                        ВЫБЫВШИЕ({this.numberOfPresentAndRetired(this.state.quittingData)})
-                    </a>
-                </tr>
-                <tr className={classes.greyFont}>
-                    <td>№ИБ</td>
-                    <td>ФИО</td>
-                    <td>{this.state.tabSelectedRoom}</td>
-                </tr>
-                {this.state.tabSelectedRoom === 'Палата' ?
-                    presentDataArr.map(item => (
-                        <tr className={classes.patient}>
-                            <td onClick={() => this.isSelectedPatient(item)}>{item.historyNumber} </td>
-                            <td onClick={() => this.isSelectedPatient(item)}>{item.firstName} {item.lastName}</td>
-                            <td onClick={() => this.isSelectedPatient(item)}>{item.bedNumber}</td>
-                        </tr>
-                    ))
-                    :
-                    retiredDataArr.map(item => (
-                        <tr className={classes.patient}>
-                            <td onClick={() => this.isSelectedPatient(item)}>{item.historyNumber}</td>
-                            <td onClick={() => this.isSelectedPatient(item)}>{item.firstName} {item.lastName}</td>
-                            <td onClick={() => this.isSelectedPatient(item)}>{item.cause}</td>
-                        </tr>
-                    ))
-                }
+                <div className={classes.patientListHeader}>
+                    <tr>
+                        <a className={classes.cursorStyle} onClick={() => this.isSelectedPresentPatient()}>
+                            ПРИСУТСТВУЮТ({this.numberOfPresentAndRetired(this.state.presentData)})
+                        </a>
+                        <a className={classes.cursorStyle} onClick={() => this.isSelectedRetiredPatient()}>
+                            ВЫБЫВШИЕ({this.numberOfPresentAndRetired(this.state.quittingData)})
+                        </a>
+                    </tr>
+                    <tr className={classes.greyFont}>
+                        <td>№ИБ</td>
+                        <td>ФИО</td>
+                        <td>{this.state.tabSelectedRoom}</td>
+                    </tr>
+                    {this.state.tabSelectedRoom === 'Палата' ?
+                        presentDataArr.map(item => (
+                            <tr className={classes.patient}>
+                                <td onClick={() => this.isSelectedPatient(item)}>{item.historyNumber} </td>
+                                <td onClick={() => this.isSelectedPatient(item)}>{item.firstName} {item.lastName}</td>
+                                <td onClick={() => this.isSelectedPatient(item)}>{item.bedNumber}</td>
+                            </tr>
+                        ))
+                        :
+                        retiredDataArr.map(item => (
+                            <tr className={classes.patient}>
+                                <td onClick={() => this.isSelectedPatient(item)}>{item.historyNumber}</td>
+                                <td onClick={() => this.isSelectedPatient(item)}>{item.firstName} {item.lastName}</td>
+                                <td onClick={() => this.isSelectedPatient(item)}>{item.cause}</td>
+                            </tr>
+                        ))
+                    }
+                </div>
             </table>
         )
     }
@@ -112,10 +114,12 @@ class PatientList extends Component {
     patientInfo = () => {
         return (
             <div>
+                <div className={classes.patientInfoHeader}>
+                    <div><a>Информация о пациенте</a></div>
+                    <div className={classes.cursorStyle} href={''} onClick={() => this.isClickedArrowButton()}>&#60;</div>
+                </div>
+
                 <table>
-                    <tr className={classes.patientInfoHeader}><a>Информация о пациенте</a>
-                        <a href={''} onClick={() => this.isClickedArrowButton()}>&#60;</a>
-                    </tr>
                     <td>
                         <tr>ФИО {this.state.firstName} {this.state.lastName}</tr>
                         <tr>Возраст {this.state.birthDate}</tr>
@@ -129,8 +133,11 @@ class PatientList extends Component {
     patientInfoEmptyPlace = () => {
         return (
             <div>
+                <div className={classes.emptyPatientInfoHeader}>
+                    <div className={classes.cursorStyle} href={''} onClick={() => this.isClickedArrowButton()}>&#60;</div>
+                </div>
                 <table>
-                    <tr onClick={() => this.isClickedArrowButton()}>&#60;</tr>
+
                 </table>
             </div>
         )
