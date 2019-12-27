@@ -78,26 +78,26 @@ class PatientList extends Component {
                 </div>
 
                 <table>
-                    <tr className={classes.greyFont}>
-                        <td>№ИБ</td>
-                        <td>ФИО</td>
-                        <td>{this.state.tabSelectedRoom}</td>
-                    </tr>
+                    <tbody className={classes.greyFont}>
+                    <td>№ИБ</td>
+                    <td>ФИО</td>
+                    <td>{this.state.tabSelectedRoom}</td>
+                    </tbody>
                     {this.state.tabSelectedRoom === 'Палата' ?
                         presentDataArr.map(item => (
-                            <tr onClick={() => this.selectedPatientHandler(item)} className={classes.patient}>
-                                <td>{item.historyNumber} </td>
-                                <td>{item.firstName} {item.lastName}</td>
-                                <td>{item.bedNumber}</td>
-                            </tr>
+                            <tbody onClick={() => this.selectedPatientHandler(item)} className={classes.patient}>
+                            <td>{item.historyNumber} </td>
+                            <td>{item.firstName} {item.lastName}</td>
+                            <td>{item.bedNumber}</td>
+                            </tbody>
                         ))
                         :
                         retiredDataArr.map(item => (
-                            <tr onClick={() => this.selectedPatientHandler(item)} className={classes.patient}>
-                                <td>{item.historyNumber}</td>
-                                <td>{item.firstName} {item.lastName}</td>
-                                <td>{item.cause}</td>
-                            </tr>
+                            <tbody onClick={() => this.selectedPatientHandler(item)} className={classes.patient}>
+                            <td>{item.historyNumber}</td>
+                            <td>{item.firstName} {item.lastName}</td>
+                            <td>{item.cause}</td>
+                            </tbody>
                         ))
                     }
                 </table>
