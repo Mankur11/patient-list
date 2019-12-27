@@ -65,41 +65,53 @@ class PatientList extends Component {
         })
     }
 
+    isActive(tabName) {
+        return this.state.tabSelectedRoom === tabName ? classes.activeButton : null
+    }
+
     patientData(presentDataArr, retiredDataArr) {
         return (
             <div className={classes.patientListWrapper}>
                 <div className={classes.patientListHeader}>
-                    <span className={classes.cursorStyle} onClick={() => this.selectedPresentPatientHandler()}>
+                    <button
+                        className={[classes.patientListHeaderButton, this.isActive('Палата')].join(' ')}
+                        onClick={() => this.selectedPresentPatientHandler()}>
                         ПРИСУТСТВУЮТ({presentDataArr.length})
-                    </span>
-                    <span className={classes.cursorStyle} onClick={() => this.selectedRetiredPatientHandler()}>
+                    </button>
+                    <button
+                        className={[classes.patientListHeaderButton, this.isActive('Причина выбытия')].join(' ')}
+                        onClick={() => this.selectedRetiredPatientHandler()}>
                         ВЫБЫВШИЕ({retiredDataArr.length})
-                    </span>
+                    </button>
                 </div>
 
                 <table>
-                    <tbody className={classes.greyFont}>
-                    <td>№ИБ</td>
-                    <td>ФИО</td>
-                    <td>{this.state.tabSelectedRoom}</td>
-                    </tbody>
+                    <thead>
+                    <tr>
+                        <th>№ИБ</th>
+                        <th>ФИО</th>
+                        <th>{this.state.tabSelectedRoom}</th>
+                    </tr>
+                    </thead>
+                    <tbody>
                     {this.state.tabSelectedRoom === 'Палата' ?
                         presentDataArr.map(item => (
-                            <tbody onClick={() => this.selectedPatientHandler(item)} className={classes.patient}>
-                            <td>{item.historyNumber} </td>
-                            <td>{item.firstName} {item.lastName}</td>
-                            <td>{item.bedNumber}</td>
-                            </tbody>
+                            <tr onClick={() => this.selectedPatientHandler(item)} className={classes.patient}>
+                                <td>{item.historyNumber} </td>
+                                <td>{item.firstName} {item.lastName}</td>
+                                <td>{item.bedNumber}</td>
+                            </tr>
                         ))
                         :
                         retiredDataArr.map(item => (
-                            <tbody onClick={() => this.selectedPatientHandler(item)} className={classes.patient}>
+                            <tr onClick={() => this.selectedPatientHandler(item)} className={classes.patient}>
                             <td>{item.historyNumber}</td>
                             <td>{item.firstName} {item.lastName}</td>
                             <td>{item.cause}</td>
-                            </tbody>
+                            </tr>
                         ))
                     }
+                    </tbody>
                 </table>
             </div>
         )
@@ -162,7 +174,7 @@ class PatientList extends Component {
 
     render() {
         return (
-            <div className={classes.PatientListWrapper}>
+            <div className={classes.patientMainWrapper}>
                 {this.state.patientSelected ? this.patientInfo() : this.patientInfoEmptyPlace()}
                 {this.patientLists()}
             </div>
