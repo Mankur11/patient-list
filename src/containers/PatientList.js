@@ -69,19 +69,46 @@ class PatientList extends Component {
         return this.state.tabSelectedRoom === tabName ? classes.activeButton : null
     }
 
-    patientData(presentDataArr, retiredDataArr) {
+    calculateAgeHandler(birthDate) {
+        const splittedBd = birthDate.split('-');
+        let age = new Date(splittedBd[0], splittedBd[1] - 1, splittedBd[2]).getYear();
+        let currentDate = new Date().getYear();
+        return currentDate - age;
+    }
+
+    filterPatientListHandler(patientsData, page) {
+        const perPage = 10;
+        return [...patientsData].splice(page * perPage, perPage - 1);
+    }
+
+    paginationRenderHandler(dataArr) {
+        const numOfPages = Math.ceil(dataArr.length / 10);
+        const list = [];
+        for (let i = 1; i <= numOfPages; i++) {
+            list.push(<li key={i}>
+                <button>{i}</button>
+            </li>)
+        }
         return (
-            <div className={classes.patientListWrapper}>
+            <ul>
+                {list}
+            </ul>
+        )
+    }
+
+    patientData(sortedPresentDataArr, sortedRetiredDataArr) {
+        return (
+            <div>
                 <div className={classes.patientListHeader}>
                     <button
                         className={[classes.patientListHeaderButton, this.isActive('Палата')].join(' ')}
                         onClick={() => this.selectedPresentPatientHandler()}>
-                        ПРИСУТСТВУЮТ({presentDataArr.length})
+                        ПРИСУТСТВУЮТ({sortedPresentDataArr.length})
                     </button>
                     <button
                         className={[classes.patientListHeaderButton, this.isActive('Причина выбытия')].join(' ')}
                         onClick={() => this.selectedRetiredPatientHandler()}>
-                        ВЫБЫВШИЕ({retiredDataArr.length})
+                        ВЫБЫВШИЕ({sortedRetiredDataArr.length})
                     </button>
                 </div>
 
@@ -95,7 +122,7 @@ class PatientList extends Component {
                     </thead>
                     <tbody>
                     {this.state.tabSelectedRoom === 'Палата' ?
-                        presentDataArr.map(item => (
+                        this.filterPatientListHandler(sortedPresentDataArr, 0).map(item => (
                             <tr onClick={() => this.selectedPatientHandler(item)} className={classes.patient}>
                                 <td>{item.historyNumber} </td>
                                 <td>{item.firstName} {item.lastName}</td>
@@ -103,16 +130,19 @@ class PatientList extends Component {
                             </tr>
                         ))
                         :
-                        retiredDataArr.map(item => (
+                        sortedRetiredDataArr.map(item => (
                             <tr onClick={() => this.selectedPatientHandler(item)} className={classes.patient}>
-                            <td>{item.historyNumber}</td>
-                            <td>{item.firstName} {item.lastName}</td>
-                            <td>{item.cause}</td>
+                                <td>{item.historyNumber}</td>
+                                <td>{item.firstName} {item.lastName}</td>
+                                <td>{item.cause}</td>
                             </tr>
                         ))
                     }
                     </tbody>
                 </table>
+                <div className={classes.paginationList}>
+                    {this.paginationRenderHandler(sortedPresentDataArr)}
+                </div>
             </div>
         )
     }
@@ -122,35 +152,22 @@ class PatientList extends Component {
             <div className={classes.patientInfoWrapper}>
                 <div className={classes.patientInfoHeader}>
                     <div><a>Информация о пациенте</a></div>
-                    <div className={classes.cursorStyle}
-                         onClick={() => this.clickedArrowButtonHandler()}>&#60;</div>
+                    <div className={classes.toggleButton} onClick={() => this.clickedArrowButtonHandler()}><img
+                        src="chevron-left-solid.svg"/>
+                    </div>
                 </div>
 
-                <table>
-                    <tr>
-                        <td>ФИО {this.state.firstName} {this.state.lastName}</td>
-                    </tr>
-                    <tr>
-                        <td>Возраст {this.state.birthDate}</td>
-                    </tr>
-                    <tr>
-                        < td> Диагноз {this.state.diagnosis}</td>
-                    </tr>
-                </table>
-            </div>
-        )
-    };
-
-    patientInfoEmptyPlace = () => {
-        return (
-            <div>
-                <div className={classes.emptyPatientInfoHeader}>
-                    <div className={classes.cursorStyle}
-                         onClick={() => this.clickedArrowButtonHandler()}>&#60;</div>
-                </div>
-                <table>
-
-                </table>
+                <ul>
+                    <li>
+                        ФИО <span>{this.state.firstName} {this.state.lastName}</span>
+                    </li>
+                    <li>
+                        Возраст <span>{this.calculateAgeHandler(this.state.birthDate)}</span>
+                    </li>
+                    <li>
+                        Диагноз <span>{this.state.diagnosis}</span>
+                    </li>
+                </ul>
             </div>
         )
     };
@@ -165,9 +182,13 @@ class PatientList extends Component {
             retiredDataArr.push(this.state.quittingData[key]);
         }
 
+        const sortedPresentDataArr = presentDataArr
+            .sort((prevItem, nextItem) => prevItem.historyNumber - nextItem.historyNumber);
+        const sortedRetiredDataArr = retiredDataArr
+            .sort((prevItem, nextItem) => prevItem.historyNumber - nextItem.historyNumber);
         return (
-            <div>
-                {this.patientData(presentDataArr, retiredDataArr)}
+            <div className={classes.patientListWrapper}>
+                {this.patientData(sortedPresentDataArr, sortedRetiredDataArr)}
             </div>
         )
     };
@@ -175,7 +196,7 @@ class PatientList extends Component {
     render() {
         return (
             <div className={classes.patientMainWrapper}>
-                {this.state.patientSelected ? this.patientInfo() : this.patientInfoEmptyPlace()}
+                {this.state.patientSelected ? this.patientInfo() : null}
                 {this.patientLists()}
             </div>
         )

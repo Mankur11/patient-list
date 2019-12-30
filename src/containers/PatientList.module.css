@@ -2,6 +2,12 @@ body, html {
     margin: 0;
 }
 
+ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
 * {
     box-sizing: border-box;
 }
@@ -21,19 +27,25 @@ body, html {
     height: 100%;
     background-color: #fefefe;
     margin-right: 1em;
+    width: 50%;
+    box-shadow: -1px 1px 2px 1px #ccc;
+}
+
+.patientPropertiesList li {
+    padding: 8px;
+}
+
+.patientPropertiesList li span {
+    border-bottom: 1px solid grey;
 }
 
 .patientListWrapper {
     border: 1px solid #e2e2e2;
+    margin-left: auto;
     height: 100%;
+    width: 50%;
     background-color: #fefefe;
     box-shadow: -1px 1px 2px 1px #ccc;
-}
-
-.emptyPatientInfoHeader {
-    display: flex;
-    width: 100%;
-    justify-content: flex-end;
 }
 
 .patientListHeaderButton {
@@ -59,6 +71,7 @@ body, html {
 .patientInfoHeader {
     display: flex;
     background-color: #3398cc;
+    padding: 11px;
     color: #fefefe;
     width: 100%;
     justify-content: space-between;
@@ -69,14 +82,26 @@ body, html {
     margin-top: 1em;
 }
 
+.paginationList {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.paginationList li {
+    display: inline-block;
+    margin-right: 5px;
+    cursor: pointer;
+}
+
+.toggleButton {
+    cursor: pointer;
+    height: 12px;
+    width: 12px;
+}
+
 .patientListHeader {
     width: 100%;
     background-color: #f9f9f9;
-}
-
-.patientListHeader > span {
-    margin-left: 1em;
-    text-decoration: none;
 }
 
 table {
